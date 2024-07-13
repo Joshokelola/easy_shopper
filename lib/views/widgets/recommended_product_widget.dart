@@ -13,10 +13,10 @@ class RecommendedItemsWidget extends StatefulWidget {
 }
 
 class _RecommendedItemsWidgetState extends State<RecommendedItemsWidget> {
-  void initState() {
-    super.initState();
-    context.read<ProductsBloc>().add(GetProductsEvent());
-  }
+  // void initState() {
+  //   super.initState();
+  //   context.read<ProductsBloc>().add(GetProductsEvent());
+  // }
 
   @override
   Widget build(BuildContext context) {

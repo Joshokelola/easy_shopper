@@ -197,12 +197,15 @@ class _HomePageState extends State<HomePage> {
                   height: 1,
                   color: Color(0xffCCCBCB),
                 ),
-                // SizedBox(
-                //   height: 20,
-                // ),
                 SizedBox(
-                  height: 370,
+                  height: 20,
+                ),
+                SizedBox(
+                  height: 450,
                   child: CollectionsWidget()),
+                  SizedBox(
+                    height: 30,
+                  )
               ],
             ),
           ),

@@ -68,10 +68,10 @@ flutter:
     - .env
     - assets/
     - assets/icons/
-    - assets/category_dress_shoe.jpg/
     - assets/category_loafers.jpg
-    - assets/category_loafer.jpg
-    - assets/category_sneaker.jpg
+    - assets/dress_shoe.jpeg
+    - assets/sandal_category.jpeg
+    - assets/sneaker_category.jpeg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

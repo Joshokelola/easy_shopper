@@ -7,10 +7,10 @@ class CollectionsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> collectionImagePaths = [
-      '/assets/category_dress_shoe.jpg',
-      '/assets/category_loafers.jpg',
-      '/assets/category_loafer.jpg',
-      '/assets/category_sneaker.jpg',
+      'assets/category_loafers.jpg',
+      'assets/dress_shoe.jpeg',
+      'assets/sandal_category.jpeg',
+      'assets/sneaker_category.jpeg'
     ];
     List<String> collectionNames = [
       'Dress Shoes',
@@ -20,11 +20,12 @@ class CollectionsWidget extends StatelessWidget {
     ];
     return GridView.builder(
         itemCount: collectionImagePaths.length,
+        physics: NeverScrollableScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
-            childAspectRatio: 0.6),
+            childAspectRatio: 0.8),
         itemBuilder: (context, index) {
           return Column(
             children: [
@@ -33,12 +34,18 @@ class CollectionsWidget extends StatelessWidget {
                 height: 176,
                 decoration: BoxDecoration(
                     image: DecorationImage(
+                  fit: BoxFit.cover,
                   image: AssetImage(
+                    
                     collectionImagePaths[index],
                   ),
                 )),
               ),
-              Text(collectionNames[index])
+              Text(collectionNames[index],  style: const TextStyle(
+                      fontSize: 14,
+                      color: Color(0xff0A0B0A),
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'Poppins'),)
             ],
           );
         });
