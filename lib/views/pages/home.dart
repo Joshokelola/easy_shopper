@@ -2,10 +2,11 @@ import 'package:easy_shopper/views/widgets/collections_widget.dart';
 import 'package:easy_shopper/views/widgets/deals_widget.dart';
 import 'package:easy_shopper/views/widgets/product_widget.dart';
 import 'package:easy_shopper/views/widgets/recommended_product_widget.dart';
+import 'package:easy_shopper/views/widgets/shopping_cart_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../controller/bloc/products_bloc.dart';
+import '../../controller/product_bloc/products_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -43,7 +44,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 40),
-            child: const Icon(Icons.shopping_cart_outlined),
+            child: const ShoppingCartWidget(),
           )
         ],
       ),

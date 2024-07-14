@@ -1,8 +1,9 @@
+import 'package:easy_shopper/controller/cart_bloc/bloc/cart_bloc.dart';
 import 'package:easy_shopper/views/widgets/product_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../controller/bloc/products_bloc.dart';
+import '../../controller/product_bloc/products_bloc.dart';
 
 class DealsWidget extends StatefulWidget {
   const DealsWidget({super.key});
@@ -39,6 +40,7 @@ class _DealsWidgetState extends State<DealsWidget> {
               ),
               itemBuilder: (context, index) {
                 return ProductItemWidget(
+                
                   productIndex: index,
                   items: state.product.sublist(3, 9),
                 );

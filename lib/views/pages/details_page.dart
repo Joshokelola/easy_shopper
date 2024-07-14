@@ -67,7 +67,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      widget.products[widget.productIndex].id,
+                      widget.products[widget.productIndex].uniqueId!,
                       style: const TextStyle(
                           fontSize: 16,
                           color: Color(0xff6E6E6E),

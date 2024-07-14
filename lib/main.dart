@@ -1,23 +1,28 @@
-import 'package:easy_shopper/controller/bloc/bloc_observer.dart';
+import 'package:easy_shopper/controller/cart_bloc/bloc/cart_bloc.dart';
+import 'package:easy_shopper/controller/product_bloc/bloc_observer.dart';
 import 'package:easy_shopper/controller/repository/get_product_repo.dart';
 import 'package:easy_shopper/views/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import 'controller/bloc/products_bloc.dart';
+import 'controller/product_bloc/products_bloc.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: ".env");
   Bloc.observer = const GetProductsBlocObserver();
-  runApp(RepositoryProvider(
-    create: (context) => GetProductsRepoImpl(),
-    child: BlocProvider(
-      create: (context) => ProductsBloc(
-        getProductsRepoImpl: RepositoryProvider.of(context),
+  runApp(MultiBlocProvider(
+    providers: [
+      RepositoryProvider(
+        create: (context) => GetProductsRepoImpl(),
       ),
-      child: const MyApp(),
-    ),
+      BlocProvider(
+        create: (context) => CartBloc(),
+      )
+    ],
+    //  create: (context) => GetProductsRepoImpl(),
+
+    child: const MyApp(),
   ));
 }
 
@@ -38,8 +43,7 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home:const HomePage(),
-    
+      home: const HomePage(),
     );
   }
 }

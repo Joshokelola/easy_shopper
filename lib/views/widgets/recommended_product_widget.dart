@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-import '../../controller/bloc/products_bloc.dart';
+import '../../controller/product_bloc/products_bloc.dart';
 
 class RecommendedItemsWidget extends StatefulWidget {
   const RecommendedItemsWidget({super.key});

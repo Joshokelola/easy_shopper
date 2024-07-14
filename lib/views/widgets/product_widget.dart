@@ -1,33 +1,38 @@
-import 'package:easy_shopper/views/pages/details_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import 'package:easy_shopper/model/t_product.dart';
-import 'package:intl/intl.dart';
+import 'package:easy_shopper/views/pages/details_page.dart';
+
+import '../../controller/cart_bloc/bloc/cart_bloc.dart';
 
 class ProductItemWidget extends StatelessWidget {
   final int productIndex;
   final List<Items> items;
-  const ProductItemWidget({
+  //Function addToCart;
+   ProductItemWidget({
     super.key,
     required this.productIndex,
     required this.items,
+    //required this.addToCart,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-          Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) {
-                        return  ProductDetailsPage(
-                          products: items,
-                          productIndex: productIndex,
-                        );
-                      },
-                    ),
-                  );
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) {
+              return ProductDetailsPage(
+                products: items,
+                productIndex: productIndex,
+              );
+            },
+          ),
+        );
       },
       child: Container(
         width: 180,
@@ -38,11 +43,13 @@ class ProductItemWidget extends StatelessWidget {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.45),
-                    image: DecorationImage(
-                        fit: BoxFit.fitWidth,
-                        image: NetworkImage(
-                            'https://api.timbu.cloud/images/${items[productIndex].imageUrl}'))),
+                  borderRadius: BorderRadius.circular(5.45),
+                  image: DecorationImage(
+                    fit: BoxFit.fitWidth,
+                    image: NetworkImage(
+                        'https://api.timbu.cloud/images/${items[productIndex].imageUrl}'),
+                  ),
+                ),
               ),
             ),
             const SizedBox(
@@ -66,8 +73,9 @@ class ProductItemWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      NumberFormat.currency(locale: 'en_NG', symbol: '₦').format(
-                          double.parse(items[productIndex].currentPrice!)),
+                      NumberFormat.currency(locale: 'en_NG', symbol: '₦')
+                          .format(
+                              double.parse(items[productIndex].currentPrice!)),
                       style: const TextStyle(
                         fontSize: 14,
                         color: Color(0xff363939),
@@ -78,17 +86,7 @@ class ProductItemWidget extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (_) {
-                    //       return  ProductDetailsPage(
-                    //         products: items,
-                    //         productIndex: productIndex,
-                    //       );
-                    //     },
-                    //   ),
-                    // );
+                     context.read<CartBloc>().add(AddItem(items[productIndex]));
                   },
                   child: Container(
                     width: 66,

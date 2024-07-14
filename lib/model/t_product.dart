@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/widgets.dart';
+
 class Items {
   final String id;
   final String? name;
@@ -9,15 +11,18 @@ class Items {
   final bool? isAvailable;
   final String? imageUrl;
   final String? currentPrice;
+  final int quantity;
 
-  Items(
-      {required this.id,
-      required this.name,
-      required this.description,
-      required this.uniqueId,
-      required this.isAvailable,
-      required this.imageUrl,
-      required this.currentPrice});
+  Items({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.uniqueId,
+    required this.isAvailable,
+    required this.imageUrl,
+    required this.currentPrice,
+    this.quantity = 1,
+  });
 
   @override
   String toString() {
@@ -44,10 +49,33 @@ class Items {
       isAvailable: map['isAvailable'],
       imageUrl: map['photos'][0]['url'],
       currentPrice: map['current_price'][0]['NGN'][0].toString(),
+      // quantity: 1,
     );
   }
 
   String toJson() => json.encode(toMap());
 
   factory Items.fromJson(String source) => Items.fromMap(json.decode(source));
+
+  Items copyWith({
+    String? id,
+    String? name,
+    String? description,
+    String? uniqueId,
+    bool? isAvailable,
+    String? imageUrl,
+    String? currentPrice,
+    int? quantity,
+  }) {
+    return Items(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      description: description ?? this.description,
+      uniqueId: uniqueId ?? this.uniqueId,
+      isAvailable: isAvailable ?? this.isAvailable,
+      imageUrl: imageUrl ?? this.imageUrl,
+      currentPrice: currentPrice ?? this.currentPrice,
+      quantity: quantity ?? this.quantity,
+    );
+  }
 }
