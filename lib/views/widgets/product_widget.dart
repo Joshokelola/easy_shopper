@@ -11,7 +11,7 @@ class ProductItemWidget extends StatelessWidget {
   final int productIndex;
   final List<Items> items;
   //Function addToCart;
-   ProductItemWidget({
+  const ProductItemWidget({
     super.key,
     required this.productIndex,
     required this.items,
@@ -44,6 +44,8 @@ class ProductItemWidget extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.45),
+                  border:
+                      Border.all(color: const Color(0xffE3E3E3), width: 0.3),
                   image: DecorationImage(
                     fit: BoxFit.fitWidth,
                     image: NetworkImage(
@@ -84,25 +86,33 @@ class ProductItemWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                InkWell(
-                  onTap: () {
-                     context.read<CartBloc>().add(AddItem(items[productIndex]));
-                  },
-                  child: Container(
-                    width: 66,
-                    height: 34,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(2.366),
-                        border: Border.all(
-                          color: const Color(0xff408C2B),
-                        )),
-                    child: const Center(
-                      child: Text(
-                        'Add to cart',
-                        style: TextStyle(fontSize: 10, fontFamily: 'Poppins'),
+                BlocBuilder<CartBloc, CartState>(
+                  builder: (context, state) {
+                    return InkWell(
+                      onTap: () {
+                        // debugPrint(state.items.toString());
+                        context
+                            .read<CartBloc>()
+                            .add(AddItem(items[productIndex]));
+                      },
+                      child: Container(
+                        width: 66,
+                        height: 34,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(2.366),
+                            border: Border.all(
+                              color: const Color(0xff408C2B),
+                            )),
+                        child: const Center(
+                          child: Text(
+                            'Add to cart',
+                            style:
+                                TextStyle(fontSize: 10, fontFamily: 'Poppins'),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
               ],
             )

@@ -1,6 +1,7 @@
+import 'package:easy_shopper/controller/cart_bloc/bloc/cart_bloc.dart';
+import 'package:easy_shopper/model/t_product.dart';
 import 'package:easy_shopper/views/widgets/collections_widget.dart';
 import 'package:easy_shopper/views/widgets/deals_widget.dart';
-import 'package:easy_shopper/views/widgets/product_widget.dart';
 import 'package:easy_shopper/views/widgets/recommended_product_widget.dart';
 import 'package:easy_shopper/views/widgets/shopping_cart_widget.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +51,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: ListView(
         //crossAxisAlignment: CrossAxisAlignment.start,
-        physics: ClampingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         children: [
           Container(
             margin: const EdgeInsets.only(left: 40, right: 40, top: 30),
@@ -174,6 +175,9 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
+           const SizedBox(
+            height: 20,
+          ),
           const DealsWidget(),
           const SizedBox(
             height: 45,
@@ -201,12 +205,10 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   height: 20,
                 ),
+                SizedBox(height: 450, child: CollectionsWidget()),
                 SizedBox(
-                  height: 450,
-                  child: CollectionsWidget()),
-                  SizedBox(
-                    height: 30,
-                  )
+                  height: 30,
+                )
               ],
             ),
           ),

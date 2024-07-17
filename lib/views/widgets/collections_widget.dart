@@ -1,4 +1,3 @@
-import 'package:easy_shopper/views/widgets/product_widget.dart';
 import 'package:flutter/material.dart';
 
 class CollectionsWidget extends StatelessWidget {
@@ -20,7 +19,7 @@ class CollectionsWidget extends StatelessWidget {
     ];
     return GridView.builder(
         itemCount: collectionImagePaths.length,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 10,

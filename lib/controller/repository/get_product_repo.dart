@@ -33,15 +33,15 @@ class GetProductsRepoImpl implements GetProductRepo {
           id: e['id'],
           name: e['name'],
           description: e['description'],
-          uniqueId: e['uniqueId'],
+          uniqueId: e['unique_id'],
           isAvailable: e['isAvailable'],
           imageUrl: e['photos'][0]['url'],
           currentPrice: e['current_price'][0]['NGN'][0].truncate().toString(),
         );
       }).toList();
-      debugPrint(items.map((e) {
-        return e.toString();
-      }).toList().toString());
+      // debugPrint(items.map((e) {
+      //   return e.toString();
+      // }).toList().toString());
       return right(items);
     } on DioException catch (e) {
       return left(Failure(e.message!));

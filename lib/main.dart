@@ -1,12 +1,12 @@
 import 'package:easy_shopper/controller/cart_bloc/bloc/cart_bloc.dart';
 import 'package:easy_shopper/controller/product_bloc/bloc_observer.dart';
+import 'package:easy_shopper/controller/product_bloc/products_bloc.dart';
 import 'package:easy_shopper/controller/repository/get_product_repo.dart';
 import 'package:easy_shopper/views/pages/home.dart';
+import 'package:easy_shopper/views/widgets/shopping_cart_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-
-import 'controller/product_bloc/products_bloc.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: ".env");
@@ -17,8 +17,13 @@ Future<void> main() async {
         create: (context) => GetProductsRepoImpl(),
       ),
       BlocProvider(
+        create: (context) => ProductsBloc(
+          getProductsRepoImpl: RepositoryProvider.of(context),
+        ),
+      ),
+      BlocProvider(
         create: (context) => CartBloc(),
-      )
+      ),
     ],
     //  create: (context) => GetProductsRepoImpl(),
 
@@ -39,6 +44,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Sharrie\'s Signature',
       theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
         //colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),

@@ -1,7 +1,6 @@
 import 'package:easy_shopper/views/widgets/product_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 
 import '../../controller/product_bloc/products_bloc.dart';
 

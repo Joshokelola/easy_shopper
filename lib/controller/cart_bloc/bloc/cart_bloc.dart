@@ -6,7 +6,9 @@ part 'cart_event.dart';
 part 'cart_state.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
-  CartBloc() : super(CartInitial()) {
+  CartBloc() : super(CartLoaded(
+    [], 0, 0, false
+  )) {
     on<AddItem>((event, emit) {
       final currentState = state;
       if (currentState is CartLoaded) {
@@ -20,11 +22,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                   : item)
               .toList();
           emit(CartLoaded(updatedItems, countTotalItems(updatedItems),
-              calculateTotalPrice(updatedItems)));
+              calculateTotalPrice(updatedItems), false));
         } else {
           final updatedItems = [...currentState.items, event.item];
           emit(CartLoaded(updatedItems, countTotalItems(updatedItems),
-              calculateTotalPrice(updatedItems)));
+              calculateTotalPrice(updatedItems), false));
         }
       }
     });
@@ -36,26 +38,23 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             .where((item) => item.id != event.item.id)
             .toList();
         emit(CartLoaded(updatedItems, countTotalItems(updatedItems),
-            calculateTotalPrice(updatedItems)));
+            calculateTotalPrice(updatedItems), true));
       }
     });
-
-    on<UpdateQuantity>((event, emit) {
+       on<UpdateQuantity>((event, emit) {
       final currentState = state;
       if (currentState is CartLoaded) {
-        final updatedItems = currentState.items
-            .map((item) => item.id == event.items.id
-                ? item.copyWith(quantity: event.newQuantity)
-                : item)
-            .toList();
-        emit(CartLoaded(updatedItems, countTotalItems(updatedItems),
-            calculateTotalPrice(updatedItems)));
+        final newQuantity = event.newQuantity.clamp(0, double.infinity); // Clamp to minimum 0
+        final updatedItems = currentState.items.map((item) =>
+            item.id == event.items.id ? item.copyWith(quantity: newQuantity.toInt()) : item).toList();
+        emit(CartLoaded(
+            updatedItems, countTotalItems(updatedItems), calculateTotalPrice(updatedItems), false));
       }
     });
 
     on<ClearCart>((event, emit) {
       emit(
-        CartLoaded([], 0, 0.0),
+        CartLoaded([], 0, 0.0, false),
       );
     });
   }
